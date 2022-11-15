@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#test
+
 location=$1
 fcount="0"
 dcount="0"
