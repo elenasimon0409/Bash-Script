@@ -1,0 +1,25 @@
+#!/bin/bash
+
+location=$1
+fcount="0"
+dcount="0"
+
+if [ "$#" -gt 0 ]
+then
+    echo "Usage: ./labq1.sh [ file [ file ... ] ]"
+    exit 1
+fi
+
+for file in $location/*
+do
+if [ -f "$file" ]
+    then
+         fcount=$((fcount++))
+    elif [ -d "$file" ]
+    then
+         dcount=$((dcount++))
+fi
+done
+
+echo "files: $fcount"
+echo "directories: $dcount"
