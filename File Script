@@ -1,26 +1,35 @@
 #!/bin/bash
 
-#test
-
 location=$1
 fcount="0"
 dcount="0"
 
-if [ "$#" -gt 0 ]
+if [ $# -gt 0 ]
 then
-    echo "Usage: ./labq1.sh [ file [ file ... ] ]"
-    exit 1
+    if [ $location = "-h" ]
+    then
+        echo "Usage: ./labq1.sh [ file [ file ... ] ]"
+        exit 1
 fi
 
+filecount(){
 for file in $location/*
 do
-if [ -f "$file" ]
+    if [ -f "$file" ]
     then
-         fcount=$((fcount++))
-    elif [ -d "$file" ]
-    then
-         dcount=$((dcount++))
+            ((fcount++))
+        elif [ -d "$file" ]
+        then
+            ((dcount++))
+            filecount $file
 fi
+done
+}
+
+while [ "$location" ]
+do
+    filecount $location
+    shift
 done
 
 echo "files: $fcount"
